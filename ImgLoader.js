@@ -12,8 +12,8 @@
 
   // constructor
   var ImgLoader = function(){};
-	ImgLoader.prototype = {};
-	var p = ImgLoader.prototype;
+  ImgLoader.prototype = {};
+  var p = ImgLoader.prototype;
   
   // Setup instance
   p.setup = function( m ){
@@ -29,21 +29,21 @@
   // Load a single image
   p.loadOne = function(){
     var self = this;
-		var file = m_manifest.shift();
+    var file = m_manifest.shift();
     var item = this.createLoadItem( file );
 
-		var img = document.createElement('img');
+    var img = document.createElement('img');
     img.addEventListener('load', item.handleLoadSuccess, false);
     img.addEventListener('error', item.handleLoadError, false);
-		img.src = item.src;
+    img.src = item.src;
   }
 
   // Load all
   p.loadAll = function(){
     var self = this;
-		while ( m_manifest.length > 0 ) {
-			 this.loadOne();
-		}
+    while ( m_manifest.length > 0 ) {
+       this.loadOne();
+    }
   }
 
   // Create property needed to image load
