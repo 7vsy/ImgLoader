@@ -1,12 +1,11 @@
 /*
  * ImgLoader
- * Version: 0.1.0
+ * Version: 0.1.1
  * https://github.com/7vsy/ImgLoader
  *
  * Copyright(c) 2012 Masato WATANABE <7vsyml@gmail.com>
  * MIT Licensed
  */
-
 (function (window) {
 
   var m_manifest;
@@ -16,12 +15,15 @@
 	ImgLoader.prototype = {};
 	var p = ImgLoader.prototype;
   
-  // Setup a ImgLoader instance
+  // Setup instance
   p.setup = function( m ){
     var self = this;
     m_manifest = m;
     this.loadCount = 0;
     this.maxLoadCount = m.length;
+    this.onFileLoad = function(){};
+    this.onFileError = function(){};
+    this.onComplete = function(){};
   }
 
   // Load a single image
@@ -58,18 +60,24 @@
           e.target.style[key] = file.css[key];
         }
       }
+      // Update loaded progress
+      document.querySelector('#ImgLoader-loading > .progress').innerHTML = self.loadCount +"/"+ self.maxLoadCount;
+      // Fire custom event (file loaded)
+      self.onFileLoad(e);
       // Append loaded resource
       document.querySelector(loadItem.selector).appendChild( e.target );
       // All resources is complete ?
       if ( self.loadCount >= self.maxLoadCount ){
         // Hide progress
         document.querySelector('#ImgLoader-loading').style.display = "none";
-      }else{
-        // Update loaded progress
-        document.querySelector('#ImgLoader-loading > .progress').innerHTML = self.loadCount +"/"+ self.maxLoadCount;
+        // Fire custom event (complete)
+        self.onComplete(e);
       }
     }
     loadItem.handleLoadError = function(e){
+      // Fire custom event (load error)
+      self.onFileError(e);
+      // Update loading message
       document.querySelector('#ImgLoader-loading > .progress').innerHTML = "<span style='color:#f00'>error</span>";
       setTimeout(function(){
         document.querySelector('#ImgLoader-loading').style.display = "none";
@@ -77,7 +85,6 @@
     }
     return loadItem;
   }
-
 
   window.ImgLoader = ImgLoader;
 
