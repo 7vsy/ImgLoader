@@ -60,28 +60,19 @@
           e.target.style[key] = file.css[key];
         }
       }
-      // Update loaded progress
-      document.querySelector('#ImgLoader-loading > .progress').innerHTML = self.loadCount +"/"+ self.maxLoadCount;
-      // Fire custom event (file loaded)
+      // The callback to fire when a file loaded
       self.onFileLoad(e);
       // Append loaded resource
       document.querySelector(loadItem.selector).appendChild( e.target );
-      // All resources is complete ?
+      // When all files load complete
       if ( self.loadCount >= self.maxLoadCount ){
-        // Hide progress
-        document.querySelector('#ImgLoader-loading').style.display = "none";
-        // Fire custom event (complete)
+        // The callback to fire when all files load complete
         self.onComplete(e);
       }
     }
     loadItem.handleLoadError = function(e){
-      // Fire custom event (load error)
+      // The callback to fire when a file load error
       self.onFileError(e);
-      // Update loading message
-      document.querySelector('#ImgLoader-loading > .progress').innerHTML = "<span style='color:#f00'>error</span>";
-      setTimeout(function(){
-        document.querySelector('#ImgLoader-loading').style.display = "none";
-      }, 2000);
     }
     return loadItem;
   }

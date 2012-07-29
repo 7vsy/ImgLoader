@@ -22,10 +22,28 @@ ImgLoader is a JavaScript library for image preload.
       var loader = new ImgLoader();
       loader.setup( manifest );
       loader.loadAll();
-      // Custom event
-      loader.onFileLoad = function(e){ console.log( e.target ) };
-      loader.onFileError = function(){ console.log("Error") };
-      loader.onComplete = function(){ console.log("Complete") };
+      // Callbacks
+      // The callback to fire when a file loaded
+      loader.onFileLoad = function(e){ 
+        console.log( e.target );
+        // Update loaded progress
+        document.querySelector('#ImgLoader-loading > .progress').innerHTML = loader.loadCount +"/"+ loader.maxLoadCount;
+      };
+      // The callback to fire when all files load complete.
+      loader.onComplete = function(){ 
+        console.log("Complete");
+        // Hide progress
+        document.querySelector('#ImgLoader-loading').style.display = "none";
+      };
+      // The callback to fire when a file load error
+      loader.onFileError = function(){ 
+        console.log("Error");
+        // Update loading message
+        document.querySelector('#ImgLoader-loading > .progress').innerHTML = "<span style='color:#f00'>error</span>";
+        setTimeout(function(){
+          document.querySelector('#ImgLoader-loading').style.display = "none";
+        }, 2000);
+      };
     }
   </script>
 </head>
