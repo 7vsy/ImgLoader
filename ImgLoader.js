@@ -1,6 +1,6 @@
 /*
  * ImgLoader
- * Version: 0.1.1
+ * Version: 0.1.2
  * https://github.com/7vsy/ImgLoader
  *
  * Copyright(c) 2012 Masato WATANABE <7vsyml@gmail.com>
