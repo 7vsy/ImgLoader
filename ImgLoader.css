@@ -1,17 +1,24 @@
-
+/*
+ * ImgLoader
+ * Version: 0.1.2
+ * https://github.com/7vsy/ImgLoader
+ *
+ * Copyright(c) 2012 Masato WATANABE <7vsyml@gmail.com>
+ * MIT Licensed
+ */
 #ImgLoader-loading {
   top:35%;
   left:36%;
+  background: #000;
   color: #fff;
   font-size: 14px;
-  line-height: 0.5;
   width: 80px;
-  background: #000;
   padding: 10px;
   margin-top: 10px;
-  text-align: center;
+  line-height: 0.8;
   position:relative;
   z-index:1000;
+  text-align: center;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
   border-radius: 10px;
@@ -20,7 +27,7 @@
   box-shadow: 0px 0px 10px rgba(0,0,0,0.5);
 }
 
-#ImgLoader-loading > .spinner {
+#ImgLoader-spinner {
   height: 10px;
   width: 10px;
   margin: 0 auto 10px auto;
@@ -29,20 +36,18 @@
   -moz-border-radius: 20px;
   border-radius: 20px;
 
-  /* Webkit */
-  -webkit-animation-name: loading;
+  -webkit-animation-name: ImgLoader-spinner-frames;
   -webkit-animation-timing-function: linear;
   -webkit-animation-iteration-count: infinite;
   -webkit-animation-duration: 1s;
 
-  /* Firefox 4+ */
-  -moz-animation-name: loading;
+  -moz-animation-name: ImgLoader-spinner-frames;
   -moz-animation-timing-function: linear;
   -moz-animation-iteration-count: infinite;
   -moz-animation-duration: 1s;
 }
 
-@-webkit-keyframes loading {
+@-webkit-keyframes ImgLoader-spinner-frames {
   0% {
     border-top: 10px solid #000;
   }
@@ -61,8 +66,29 @@
   }
 }
 
-#ImgLoader-loading > .progress {
-  margin: 10px;
+@-moz-keyframes ImgLoader-spinner-frames {
+  0% {
+    border-top: 10px solid #000;
+  }
+  25% {
+    border-right: 10px solid #000;
+  }
+  50% {
+    border-bottom: 10px solid #000;
+  }
+  75% {
+    border-left: 10px solid #000;
+  }
+  100% {
+    border-top: 10px solid #888;
+    border-left: 10px solid #888;
+  }
+}
+
+#ImgLoader-progress {
+  padding: 10px;
   text-align: center;
+  background: #000;
+  color: #fff;
 }
 

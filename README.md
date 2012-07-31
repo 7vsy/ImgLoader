@@ -49,8 +49,9 @@ ImgLoader is a JavaScript library for image preload.
 </head>
 <body onload="init()">
   <div id="ImgLoader-loading">
-    <div class="spinner"></div><span>Loading...</span><div class="progress"></div>
+    <div id="ImgLoader-spinner"></div><div>Loading...</div><div id="ImgLoader-progress"></div>
   </div>
+
   <div id="image-store1" style="display:block;"></div>
   <div id="image-store2" ></div>
 </body>
