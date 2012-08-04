@@ -22,38 +22,45 @@ ImgLoader is a JavaScript library for image preload.
       var loader = new ImgLoader();
       loader.setup( manifest );
       loader.loadAll();
+
+      var progress = document.querySelector('.container .ImgLoader-progress');
+      var loading = document.querySelector('.container .ImgLoader-loading');
+
       // Callbacks
       // The callback to fire when a file loaded
       loader.onFileLoad = function(e){ 
         console.log( e.target );
         // Update loaded progress
-        document.querySelector('#ImgLoader-progress').innerHTML = loader.loadCount +"/"+ loader.maxLoadCount;
+        progress.innerHTML = loader.loadCount +"/"+ loader.maxLoadCount;
       };
       // The callback to fire when all files load complete.
       loader.onComplete = function(){ 
         console.log("Complete");
         // Hide progress
-        document.querySelector('#ImgLoader-loading').style.display = "none";
+        loading.style.display = "none";
       };
       // The callback to fire when a file load error
       loader.onFileError = function(){ 
         console.log("Error");
         // Update loading message
-        document.querySelector('#ImgLoader-progress').innerHTML = "<span style='color:#f00'>error</span>";
+        progress.innerHTML = "<span style='color:#f00'>error</span>";
         setTimeout(function(){
-          document.querySelector('#ImgLoader-loading').style.display = "none";
+          loading.style.display = "none";
         }, 2000);
       };
     }
   </script>
 </head>
 <body onload="init()">
-  <div id="ImgLoader-loading">
-    <div id="ImgLoader-spinner"></div><div>Loading...</div><div id="ImgLoader-progress"></div>
-  </div>
+  
+  <div class="container">
+    <div class="ImgLoader-loading">
+      <div class="ImgLoader-spinner"></div><div>Loading...</div><div class="ImgLoader-progress"></div>
+    </div>
 
-  <div id="image-store1" style="display:block;"></div>
-  <div id="image-store2" ></div>
+    <div id="image-store1"></div>
+    <div id="image-store2"></div>
+  </div>
 </body>
 </html>
 ```
