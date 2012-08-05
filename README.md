@@ -18,9 +18,16 @@ ImgLoader is a JavaScript library for image preload.
         { src: "./assets/image2.jpg", selector: "#image-store1", css:{ width:"100px", opacity:0.5 } },
         { src: "./assets/image3.jpg", selector: "#image-store2", css:{ width:"20%" } },
       ];
-      // Run
+      // New
       var loader = new ImgLoader();
-      loader.setup( manifest );
+
+      var onInit = function(){
+        console.log("Init");
+      }
+      
+      // Initialize
+      loader.init( manifest, onInit );
+      // Run
       loader.loadAll();
 
       var progress = document.querySelector('#stage1 .ImgLoader-progress');
@@ -44,9 +51,6 @@ ImgLoader is a JavaScript library for image preload.
         console.log("Error");
         // Update loading message
         progress.innerHTML = "<span style='color:#f00'>error</span>";
-        setTimeout(function(){
-          loading.style.display = "none";
-        }, 2000);
       };
     }
   </script>

@@ -1,6 +1,6 @@
 /*
  * ImgLoader
- * Version: 0.1.2
+ * Version: 0.1.3
  * https://github.com/7vsy/ImgLoader
  *
  * Copyright(c) 2012 Masato WATANABE <7vsyml@gmail.com>
@@ -15,15 +15,25 @@
   ImgLoader.prototype = {};
   var p = ImgLoader.prototype;
   
-  // Setup instance
-  p.setup = function( m ){
+  /**
+   * Initialization method
+   * @method init
+   * @param {Object} m Manifest of load images
+   * @param {Function} onInit Callback function
+   **/
+  p.init = function( m, onInit ){
     var self = this;
-    m_manifest = m;
+
+    m_manifest = this.clone( m );
     this.loadCount = 0;
     this.maxLoadCount = m.length;
+    this.onInit = onInit || function(){};
     this.onFileLoad = function(){};
     this.onFileError = function(){};
     this.onComplete = function(){};
+    
+    // The callback to fire when a initialize
+    this.onInit();
   }
 
   // Load a single image
@@ -76,6 +86,17 @@
     }
     return loadItem;
   }
+
+  // Object deep copy
+  p.clone = function( that ){
+    var clone = new (that.constructor);
+    for (var i in that) {
+      if (!that.hasOwnProperty(i)) continue;
+      clone[i] = typeof that[i] == 'object' ? this.clone( that[i] ) : that[i];
+    }
+    return clone;
+  }
+
 
   window.ImgLoader = ImgLoader;
 
