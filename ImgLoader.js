@@ -1,6 +1,6 @@
 /*
  * ImgLoader
- * Version: 0.1.3
+ * Version: 0.1.4
  * https://github.com/7vsy/ImgLoader
  *
  * Copyright(c) 2012 Masato WATANABE <7vsyml@gmail.com>
@@ -20,16 +20,19 @@
    * @method init
    * @param {Object} m Manifest of load images
    * @param {Function} onInit Callback function
+   * @param {Integer} timeout Timeout time (ms)
    **/
-  p.init = function( m, onInit ){
+  p.init = function( m, onInit, timeout ){
     var self = this;
 
     m_manifest = this.clone( m );
     this.loadCount = 0;
+    this.timeoutTime = timeout || 100000; // (ms)
     this.maxLoadCount = m.length;
     this.onInit = onInit || function(){};
     this.onFileLoad = function(){};
     this.onFileError = function(){};
+    this.onTimeout = function(){};
     this.onComplete = function(){};
     
     // The callback to fire when a initialize
@@ -54,6 +57,13 @@
     while ( m_manifest.length > 0 ) {
        this.loadOne();
     }
+
+    // When the timeout
+    setTimeout(function(){
+      if ( self.maxLoadCount > self.loadCount ){
+        self.onTimeout();
+      }
+    }, self.timeoutTime);
   }
 
   // Create property needed to image load
