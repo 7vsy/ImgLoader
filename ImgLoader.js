@@ -1,12 +1,12 @@
 /*
  * ImgLoader
- * Version: 0.1.4
+ * Version: 0.1.5
  * https://github.com/7vsy/ImgLoader
  *
  * Copyright(c) 2012 Masato WATANABE <7vsyml@gmail.com>
  * MIT Licensed
  */
-(function (window) {
+(function (window, document) {
 
   var m_manifest;
 
@@ -110,4 +110,4 @@
 
   window.ImgLoader = ImgLoader;
 
-}(window));
+}(window, document));
