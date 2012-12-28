@@ -1,6 +1,6 @@
 /*
  * ImgLoader
- * Version: 0.1.5
+ * Version: 0.1.6
  * https://github.com/7vsy/ImgLoader
  *
  * Copyright(c) 2012 Masato WATANABE <7vsyml@gmail.com>
@@ -12,7 +12,6 @@
 
   // constructor
   var ImgLoader = function(){};
-  ImgLoader.prototype = {};
   var p = ImgLoader.prototype;
   
   /**
